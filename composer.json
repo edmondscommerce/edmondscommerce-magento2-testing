@@ -1,5 +1,5 @@
 {
-    "name": "edmondscommerce/module-testing",
+    "name": "edmondscommerce/module-magento2-test-runner",
     "description": "",
     "type": "magento2-module",
     "license": "proprietary",

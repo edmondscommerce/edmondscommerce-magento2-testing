@@ -17,6 +17,7 @@
     <testsuites>
         <testsuite name="Edmonds Commerce Integration Tests">
             <directory suffix="Test.php">../../../app/code/EdmondsCommerce/*/Test/Integration</directory>
+            <directory suffix="Test.php">../../../vendor/edmondscommerce/*/Test/Integration</directory>
         </testsuite>
     </testsuites>
     <!-- Code coverage filters -->

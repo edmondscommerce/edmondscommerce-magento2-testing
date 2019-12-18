@@ -77,7 +77,10 @@ echo "
 Running Mess Detector against the code
 --------------------------------------
 "
-php $bin_dir/phpmd ${directoryToTest} text ${base_dir}dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
+php $bin_dir/phpmd \
+    ${directoryToTest} \
+    text \
+    ${base_dir}dev/tests/static/testsuite/Magento/Test/Php/_files/phpmd/ruleset.xml
 echo "
 --------------------------------------------
 Running Copy Paste Detector against the code

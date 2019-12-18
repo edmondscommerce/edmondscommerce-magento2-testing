@@ -18,5 +18,6 @@
         "files": [
             "registration.php"
         ]
-    }
+    },
+    "bin": ["bin/qa.m2.bash", "bin/runIntergrationTests.bash"]
 }

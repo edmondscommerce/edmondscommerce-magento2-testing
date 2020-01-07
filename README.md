@@ -12,6 +12,12 @@ composer config repositories.edmondscommerce-test-runner vcs git@bitbucket.org:e
 composer require edmondscommerce/module-magento2-test-runner --dev
 ```
 
+Also ensure that you have the Magento 2 coding standards installed
+
+```bash
+composer require --dev magento/magento-coding-standard
+```
+
 ## Running QA
 
 There will now be a `qa.m2.bash` file in the `vendor/bin` folder. By default it will scan the entire `app/code`

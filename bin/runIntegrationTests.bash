@@ -56,7 +56,7 @@ fi
 
 if [[ $copyConfig == 'true' ]]
 then
-    cp ${base_dir}vendor/edmondscommerce/module-testing/Test/Integration/phpunit.edmondscommerce.xml ./
+    cp ${base_dir}vendor/edmondscommerce/module-magento2-test-runner/Test/Integration/phpunit.edmondscommerce.xml ./
 fi
 
 php ../../../vendor/bin/phpunit -c phpunit.edmondscommerce.xml

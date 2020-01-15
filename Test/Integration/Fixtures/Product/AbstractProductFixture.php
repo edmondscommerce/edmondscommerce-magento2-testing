@@ -46,7 +46,7 @@ abstract class AbstractProductFixture
     {
         $objectManager = self::getObjectManager();
         /** @var ProductRepositoryInterface $respository */
-        $respository = $objectManager->get(ProductRepositoryInterface::class);
+        $respository = $objectManager->create(ProductRepositoryInterface::class);
         $respository->save($product);
     }
 

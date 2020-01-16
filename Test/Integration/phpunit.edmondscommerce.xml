@@ -26,6 +26,7 @@
             <directory suffix=".php">../../../app/code/EdmondsCommerce</directory>
             <exclude>
                 <directory>../../../app/code/EdmondsCommerce/*/Test</directory>
+                <file>../../../app/code/EdmondsCommerce/*/registration.php</file>
             </exclude>
         </whitelist>
     </filter>

@@ -26,7 +26,8 @@
             <directory suffix=".php">../../../app/code/EdmondsCommerce</directory>
             <exclude>
                 <directory>../../../app/code/EdmondsCommerce/*/Test</directory>
-                <file>../../../app/code/EdmondsCommerce/*/registration.php</file>
+                    <!-- PHPUnit has flaky support for the file node and wildcards - this works in excluding the registation files -->
+                <directory suffix="registration.php">../../../app/code/EdmondsCommerce/*/</directory>
             </exclude>
         </whitelist>
     </filter>

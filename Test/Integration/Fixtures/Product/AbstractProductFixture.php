@@ -13,8 +13,8 @@ use Magento\TestFramework\Helper\Bootstrap;
 
 abstract class AbstractProductFixture
 {
-    abstract public static function createProductFixture();
-    
+    abstract public static function createProductFixture(): void;
+
     protected static function setBasicProductDetails(Product $product): Product
     {
         $product
@@ -23,7 +23,14 @@ abstract class AbstractProductFixture
             ->setWebsiteIds([1])
             ->setVisibility(Visibility::VISIBILITY_BOTH)
             ->setStatus(Status::STATUS_ENABLED)
-            ->setStockData(['use_config_manage_stock' => 0]);
+            ->setStockData(
+                [
+                    'use_config_manage_stock' => 1,
+                    'qty'                     => 100,
+                    'is_qty_decimal'          => 0,
+                    'is_in_stock'             => 1,
+                ]
+            );
 
         return $product;
     }

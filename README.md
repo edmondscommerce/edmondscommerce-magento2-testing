@@ -8,7 +8,7 @@ account, details can be found [here](https://confluence.atlassian.com/bitbucket/
 Then cd to the project directory and run the following commands
 
 ```bash
-composer config repositories.edmondscommerce-test-runner vcs git@bitbucket.org:edmondscommerce/edmondscommerce-magento2-testing.git
+composer config repositories.edmondscommerce-test-runner vcs git@github.com:edmondscommerce/edmondscommerce-magento2-testing.git
 composer require edmondscommerce/module-magento2-test-runner --dev
 ```
 

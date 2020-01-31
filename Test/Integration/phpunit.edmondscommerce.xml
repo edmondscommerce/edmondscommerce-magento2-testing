@@ -7,11 +7,18 @@
 -->
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/6.2/phpunit.xsd"
+         beStrictAboutCoversAnnotation="true"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         beStrictAboutTodoAnnotatedTests="true"
+         bootstrap="./framework/bootstrap.php"
          colors="true"
          columns="max"
-         beStrictAboutTestsThatDoNotTestAnything="false"
-         bootstrap="./framework/bootstrap.php"
+         failOnRisky="true"
+         failOnWarning="true"
+         forceCoversAnnotation="true"
          stderr="true"
+         timeoutForLargeTests="300"
+         timeoutForMediumTests="10"
 >
     <!-- Test suites definition -->
     <testsuites>
@@ -26,11 +33,15 @@
             <directory suffix=".php">../../../app/code/EdmondsCommerce</directory>
             <exclude>
                 <directory>../../../app/code/EdmondsCommerce/*/Test</directory>
-                    <!-- PHPUnit has flaky support for the file node and wildcards - this works in excluding the registation files -->
+                <!-- PHPUnit has flaky support for the file node and wildcards - this works in excluding the registation files -->
                 <directory suffix="registration.php">../../../app/code/EdmondsCommerce/*/</directory>
             </exclude>
         </whitelist>
     </filter>
+    <logging>
+        <log type="coverage-html" target="../../../var/qa/phpunit_coverage"/>
+        <log type="coverage-text" target="php://stdout"/>
+    </logging>
     <!-- PHP INI settings and constants definition -->
     <php>
         <includePath>.</includePath>

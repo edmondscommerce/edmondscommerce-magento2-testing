@@ -2,13 +2,9 @@
 
 ## Installation
 
-First make sure the container has access to the BitBucket repos. If it does not then add the public key to the
-account, details can be found [here](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html)
-
-Then cd to the project directory and run the following commands
+Use composer:
 
 ```bash
-composer config repositories.edmondscommerce-test-runner vcs git@github.com:edmondscommerce/edmondscommerce-magento2-testing.git
 composer require edmondscommerce/module-magento2-test-runner --dev
 ```
 
@@ -45,6 +41,37 @@ Alter the contents to have the correct configuration, you MUST use a totally sep
 You can remove the `amqp-` files if not using rabbit queue.
 
 See [here](https://devdocs.magento.com/guides/v2.3/test/integration/integration_test_execution.html#setup) for further details
+
+### PHP Unit Config
+
+Copy `vendor/edmondscommerce/module-magento2-test-runner/Test/Integration/phpunit.xml` to `dev/tests/integration`.
+
+```
+cp vendor/edmondscommerce/module-magento2-test-runner/Test/Integration/phpunit.xml dev/tests/integration/
+```
+
+### Copy scripts
+
+Copy `vendor/edmondscommerce/module-magento2-test-runner/bin/magentoIntegrationTests/generateTests.bash` and `vendor/edmondscommerce/module-magento2-test-runner/bin/magentoIntegrationTests/runTests.bash` to `dev/tests/integration`.
+
+```
+cp vendor/edmondscommerce/module-magento2-test-runner/bin/magentoIntegrationTests/generateTests.bash dev/tests/integration
+cp vendor/edmondscommerce/module-magento2-test-runner/bin/magentoIntegrationTests/runTests.bash dev/tests/integration
+```
+
+### Generating the Tests
+
+`cd dev/tests/integration` then `bash generateTests.bash` to generate all the tests.
+
+### Running the Tests
+
+To run an indivual test: 
+
+`cd dev/tests/integration`
+
+`../../../vendor/bin/phpunit -c [Name Of Test]` ie `../../../vendor/bin/phpunit -c phpunit.magento.Checkout.xml`
+
+To run all the tests use `bash runTests.bash`.
 
 ### Setting up php unit configuration
 

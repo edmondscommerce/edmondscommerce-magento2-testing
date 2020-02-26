@@ -6,10 +6,12 @@ namespace EdmondsCommerce\Testing\Test\Integration\Fixtures\Customer;
 
 use Magento\Customer\Api\Data\AddressInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Customer\Model\CustomerRegistry;
 use Magento\Customer\Model\Data\Address;
 use Magento\Customer\Model\Data\Customer;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Customer\Model\ResourceModel\GroupRepository;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
 
@@ -61,6 +63,23 @@ abstract class AbstractCustomerFixture
         $registry = self::getObjectManager()->get(CustomerRegistry::class);
         $repository->save($customer);
         $registry->remove($customer->getId());
+    }
+
+    protected static function createGroup(string $code): GroupInterface
+    {
+        /** @var GroupInterface $group */
+        $group = self::getObjectManager()->create(GroupInterface::class);
+        $group->setCode($code);
+        $group->setTaxClassId(GroupRepository::DEFAULT_TAX_CLASS_ID);
+
+        return $group;
+    }
+
+    protected static function saveGroup(GroupInterface $group): GroupInterface
+    {
+        /** @var GroupRepository $repository */
+        $repository = self::getObjectManager()->create(GroupRepository::class);
+        return $repository->save($group);
     }
 
     protected static function getObjectManager(): ObjectManagerInterface

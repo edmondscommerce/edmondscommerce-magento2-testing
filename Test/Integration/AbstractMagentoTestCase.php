@@ -7,7 +7,10 @@ namespace EdmondsCommerce\Testing\Test\Integration;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
+use Magento\Customer\Api\Data\GroupInterface;
+use Magento\Customer\Api\GroupRepositoryInterface;
 use Magento\Customer\Model\ResourceModel\CustomerRepository;
+use Magento\Framework\Api\SearchCriteriaBuilderFactory;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Store\Model\StoreRepository;
@@ -15,6 +18,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 use RuntimeException;
+use function array_pop;
 use function get_class;
 
 abstract class AbstractMagentoTestCase extends TestCase
@@ -61,6 +65,24 @@ abstract class AbstractMagentoTestCase extends TestCase
         $repository = $this->getObjectManager()->create(CustomerRepository::class);
 
         return $repository->get($email, $websiteId);
+    }
+
+    public function getCustomerGroupByCode(string $groupCode): GroupInterface
+    {
+        /** @var GroupRepositoryInterface $repository */
+        $repository = $this->getObjectManager()->get(GroupRepositoryInterface::class);
+        /** @var SearchCriteriaBuilderFactory $criteriaBuilder */
+        $criteriaBuilder = $this->getObjectManager()->get(SearchCriteriaBuilderFactory::class);
+        $criteria = $criteriaBuilder->create()->addFilter('customer_group_code', $groupCode)->create();
+        $groups = $repository->getList($criteria);
+        $count = $groups->getTotalCount();
+        if($count !== 1) {
+            throw new RuntimeException("Did not find exactly one group with code $groupCode");
+        }
+        
+        $allGroups =  $groups->getItems();
+
+        return array_pop($allGroups);
     }
 
     protected function assertProductHasChanges(ProductInterface $product): void

@@ -16,7 +16,7 @@ abstract class AbstractAttributeFixture
     {
         /** @var Attribute $attribute */
         $attribute = Bootstrap::getObjectManager()->create(Attribute::class);
-        $attribute->setAttributeCode('barcode')
+        $attribute->setAttributeCode($code)
                   ->setEntityTypeId(4)
                   ->setBackendType('varchar');
 

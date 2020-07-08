@@ -1,0 +1,19 @@
+# URL of the site - no protocol and no trailing slash
+BASE_URL="www.example.com"
+
+# Database details
+DB_NAME="magento_testing"
+DB_USER=""
+DB_PASS=""
+
+# Admin configuration - can be left as default as this will never be used outside of testing
+MAGENTO_BACKEND_NAME=admin
+MAGENTO_ADMIN_USERNAME=admin
+MAGENTO_ADMIN_PASSWORD=123123q
+
+# Theme ID - Run `magerun dev:theme:list` to find this
+THEME_ID=4
+
+# Name of the test suite to run - See https://devdocs.magento.com/mftf/docs/suite.html
+# This will be mapped to an xml file later
+TEST_SUITE="critical"

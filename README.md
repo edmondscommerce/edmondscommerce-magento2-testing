@@ -63,3 +63,50 @@ bash vendor/bin/runIntegrationTests.bash
 bash vendor/bin/runIntegrationTests.bash false
 ```
 
+# Running Acceptance Tests
+
+There is a helper script that will try to setup the Magento 2 acceptance testing suite, this will
+also validate as much as possible and allows for the use of a centralised environment configuration file.
+
+## Project Requirements
+
+* You must have the appropriate version of MFTF installed as a dev dependency
+* Magerun2 must be installed and usable on the system path as `magerun`
+* System level bash support, this has been tested under Centos 7
+
+## Setup
+
+The script is written in a way to provide as much feedback as possible when something is wrong with the
+configuration.
+
+In places it will auto fix issues with data from the main environment file and also try to protect you.
+
+### Environment file
+
+In this repository there is a [test.bash.dist](./test.bash.dist) file that needs to be copied to the
+root of the Magento 2 project and renamed to `test.bash` - this will be used to load your project/environment
+specific variables to use later.
+
+This file should also be git ignored, this will be checked as part of the setup script, this also serves as an environment check
+as this file should never exist in production nor should this module be installed in production for that matter.
+
+Once the file is copied, fill out the different variable values as required.
+
+### Running the Setup Script
+
+Run `bash vendor/bin/setupAcceptanceTests.bash` from the root of your project, this is assuming that 
+bin files are still setup to be symlinked with composer. 
+
+You can use the full path `vendor/edmondscommerce/module-magento2-test-runner/bin/setupAcceptanceTests.bash` if necessary
+and the tool will recognise this.
+
+During the running of the script the configured Magento store will be set to use a new test database set in the
+environment file, this test database must exist and be accessible by the configured Mysql user in the database file.
+
+The script will validate different things in the environment and let you know what to do if it finds a problem.
+
+## Running the tests
+The setup script will generate the test suite that you configure but will not run them.
+
+For the acceptance tests to run you must have Selenium or Zalenium configured and working before the tests
+will run correctly.

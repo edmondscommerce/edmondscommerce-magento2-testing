@@ -120,7 +120,7 @@ if [[ ! -f ${magentoAcceptanceEnv} ]]
 then
     echo "Testing env file not present in ${magentoAcceptanceEnv}, creating default based on tests.bash";
     echo "\
-MAGENTO_BASE_URL=https://${BASE_URL}
+MAGENTO_BASE_URL=https://${BASE_URL}/
 MAGENTO_BACKEND_NAME=admin
 MAGENTO_ADMIN_USERNAME=admin
 MAGENTO_ADMIN_PASSWORD=123123q

@@ -19,5 +19,9 @@
             "registration.php"
         ]
     },
-    "bin": ["bin/qa.m2.bash", "bin/runIntegrationTests.bash"]
+    "bin": [
+        "bin/qa.m2.bash",
+        "bin/runIntegrationTests.bash",
+        "bin/setupAcceptanceTests.bash"
+    ]
 }

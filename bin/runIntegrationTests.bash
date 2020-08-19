@@ -10,6 +10,7 @@ bin_dir=${DIR}
 base_dir="${DIR}/../../"
 intergration_test_folder="${base_dir}/dev/tests/integration/"
 database_config_file="${intergration_test_folder}/etc/install-config-mysql.php"
+phpUnitConfigPath="$(realpath ${intergration_test_folder}/phpunit.edmondscommerce.xml)";
 
 function usage(){
     echo "
@@ -56,7 +57,14 @@ fi
 
 if [[ $copyConfig == 'true' ]]
 then
-    cp ${base_dir}vendor/edmondscommerce/module-magento2-test-runner/Test/Integration/phpunit.edmondscommerce.xml ./
+    if [[ ! -f "$phpUnitConfigPath" ]]
+    then
+      cp ${base_dir}vendor/edmondscommerce/module-magento2-test-runner/Test/Integration/phpunit.edmondscommerce.xml ./
+    else
+      echo "Detected PHPUnit XML file at ${phpUnitConfigPath}.";
+      echo "Delete the file to get a fresh copy and rerun this script.";
+    fi
 fi
 
+echo "Running PHPUnit, if you have test clean up enabled this may take some time to show output.";
 php ../../../vendor/bin/phpunit -c phpunit.edmondscommerce.xml

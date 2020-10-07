@@ -24,13 +24,12 @@ fi
 
 gitIgnoreFile="$magentoRoot/.gitignore";
 envPath="$magentoRoot/tests.bash";
-
 # ----------------------- #
 # Validation of env file  #
 # ----------------------- #
 if [[ ! -f "$envPath" ]]
 then
-    echo "Env file does not exist, create your tests.env file at $envPath";
+    echo "Env file does not exist, create your tests.bash file at $envPath";
     exit 1;
 fi
 echo "Found env file at $envPath";
@@ -38,8 +37,8 @@ echo "Found env file at $envPath";
 envIsGitIgnored="$(grep -E "^tests.bash$" $gitIgnoreFile || true)";
 if [[ "$envIsGitIgnored" != "tests.bash" ]]
 then
-    echo "Make sure your tests.env file is git ignored.
-Use a tests.env.dist file to version things without sensitive data such as database details";
+    echo "Make sure your tests.bash file is git ignored.
+Use a tests.bash.dist file to version things without sensitive data such as database details";
     exit 1;
 fi
 
@@ -54,6 +53,9 @@ BASE_URL
 DB_NAME
 DB_USER
 DB_PASS
+MAGENTO_BACKEND_NAME
+MAGENTO_ADMIN_USERNAME
+MAGENTO_ADMIN_PASSWORD
 THEME_ID
 TEST_SUITE
 ";
@@ -121,9 +123,10 @@ then
     echo "Testing env file not present in ${magentoAcceptanceEnv}, creating default based on tests.bash";
     echo "\
 MAGENTO_BASE_URL=https://${BASE_URL}/
-MAGENTO_BACKEND_NAME=admin
-MAGENTO_ADMIN_USERNAME=admin
-MAGENTO_ADMIN_PASSWORD=123123q
+MAGENTO_BACKEND_NAME=${MAGENTO_BACKEND_NAME}
+MAGENTO_ADMIN_USERNAME=${MAGENTO_ADMIN_USERNAME}
+MAGENTO_ADMIN_PASSWORD=${MAGENTO_ADMIN_PASSWORD}
+WAIT_TIMEOUT=180
 " > ${magentoAcceptanceEnv};
 fi
 
@@ -210,7 +213,6 @@ Generating test suite
 ------------------------------------------
 "
 mftf generate:suite ${TEST_SUITE} -r
-
 
 echo "
 ----------------

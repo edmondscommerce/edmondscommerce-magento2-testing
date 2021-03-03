@@ -28,7 +28,7 @@ abstract class AbstractMagentoTestCase extends TestCase
      */
     private $objectMaanger;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->objectMaanger = Bootstrap::getObjectManager();

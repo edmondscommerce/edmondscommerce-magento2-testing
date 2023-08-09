@@ -13,7 +13,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "EdmondsCommerce\\Testing\\": ""
+            "EdmondsCommerce\\Testing\\": "./"
         },
         "files": [
             "registration.php"

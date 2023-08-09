@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Traits;
+namespace EdmondsCommerce\Testing\Traits;
 
 use EdmondsCommerce\Testing\Assertions\DatabaseAssertions;
 use Magento\TestFramework\Helper\Bootstrap;

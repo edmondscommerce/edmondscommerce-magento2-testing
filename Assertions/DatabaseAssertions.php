@@ -45,13 +45,19 @@ class DatabaseAssertions
         );
     }
 
-    public function assertTotalTableRowCount(string $table, int $expectedCount): void
+    public function assertTotalTableRowCount(string $table, int $expectedCount, string $message = null): void
     {
         $allRowCount = $this->queryTableCount($table, []);
 
         Assert::assertSame(
             $expectedCount,
-            $allRowCount
+            $allRowCount,
+            $message ?? sprintf(
+                'Incorrect record count for table %s, expected %s but found %s',
+                $table,
+                $expectedCount,
+                $allRowCount
+            )
         );
     }
 

@@ -45,6 +45,16 @@ class DatabaseAssertions
         );
     }
 
+    public function assertTotalTableRowCount(string $table, int $expectedCount): void
+    {
+        $allRowCount = $this->queryTableCount($table, []);
+
+        Assert::assertSame(
+            $expectedCount,
+            $allRowCount
+        );
+    }
+
     private function queryTableCount(string $table, array $fields): int
     {
         $query = $this->connection->getConnection()->select();
